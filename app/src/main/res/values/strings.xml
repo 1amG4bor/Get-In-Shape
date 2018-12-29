@@ -1,4 +1,12 @@
 <resources>
-    <string name="app_name">GetInShape</string>
+    <string name="app_name">Get In Shape!</string>
     <string name="action_settings">Settings</string>
+    <string name="trainingList_titleText">Test workout</string>
+    <string name="trainingTitle">Training title</string>
+    <string name="trainingBtn_start_text">Start workout!</string>
+    <string name="trainingBtn_edit_text">Modify workout</string>
+    <string name="workoutName_text">Name of the workout</string>
+    <string name="workoutName_info">0:42</string>
+    <string name="workoutTitle">Name of the workout</string>
+    <string name="nextWorkout_header">Next:</string>
 </resources>

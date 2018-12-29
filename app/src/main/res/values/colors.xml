@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#F44336</color>
+    <color name="colorPrimaryDark">#C62828</color>
+    <color name="colorAccent">#FDD835</color>
+    <color name="windowBackground">#A0A0A0</color>
+    <color name="textColor_dark">#111</color>
+    <color name="textColor_light">#EEE</color>
+
+    // my Special Colors
+    <color name="myGreen">#388e3c</color>
+    <color name="myYellow">#FDD835</color>
+    <color name="myRed">#F44336</color>
+    <color name="border_color">#000</color>
+    <color name="border_background">#555</color>
 </resources>
