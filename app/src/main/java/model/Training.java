@@ -7,10 +7,12 @@ public class Training {
     private String name;
     private int imageId;
     private List<Workout> taskList;
+    private DifficultyLevel level;
 
-    public Training(String name, int imageId) {
+    public Training(String name, int imageId, DifficultyLevel level) {
         this.name = name;
         this.imageId = imageId;
+        this.level = level;
         taskList = new ArrayList<>();
     }
 
@@ -37,6 +39,14 @@ public class Training {
 
     public void setImageId(int imageId) {
         this.imageId = imageId;
+    }
+
+    public DifficultyLevel getLevel() {
+        return level;
+    }
+
+    public void setLevel(DifficultyLevel level) {
+        this.level = level;
     }
 
     public List<Workout> getTaskList() {

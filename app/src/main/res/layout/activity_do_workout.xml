@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:CircleProgressView="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,19 +8,34 @@
     android:padding="16dp"
     tools:context=".DoWorkoutActivity">
 
+    <TextView
+        android:id="@+id/dw_training_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/black_panel"
+        android:text="Name of the Training"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:letterSpacing="0.2"
+        android:textColor="@color/textColor_light"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <ImageView
-        android:id="@+id/workout_image"
+        android:id="@+id/dw_workout_image"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_margin="2dp"
         android:background="@drawable/black_border"
         android:padding="2dp"
         android:scaleType="centerCrop"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/weight" />
+        app:layout_constraintTop_toBottomOf="@+id/dw_training_name"
+        app:srcCompat="@drawable/weight"
+         />
 
     <TextView
-        android:id="@+id/workout_title"
+        android:id="@+id/dw_workout_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|bottom"
@@ -35,85 +49,51 @@
         android:textAlignment="center"
         android:textColor="@color/textColor_light"
         android:textSize="21sp"
-        app:layout_constraintBottom_toBottomOf="@+id/workout_image" />
+        app:layout_constraintBottom_toBottomOf="@+id/dw_workout_image" />
 
     <LinearLayout
-        android:id="@+id/next_div"
+        android:id="@+id/dw_next_div"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/black_panel"
         android:orientation="horizontal"
         android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/workout_image">
+        app:layout_constraintTop_toBottomOf="@+id/dw_workout_image">
 
         <TextView
-            android:id="@+id/nextHeader"
+            android:id="@+id/dw_nextHeader"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:background="#2FFF"
             android:padding="4dp"
             android:paddingVertical="8dp"
             android:text="@string/nextWorkout_header"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
             android:textAlignment="center" />
 
         <TextView
-            android:id="@+id/nextTitle"
+            android:id="@+id/dw_nextTitle"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:padding="4dp"
             android:paddingStart="12dp"
             android:text="e.g.: Jumping jacks"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            android:letterSpacing="0.1"
             tools:ignore="HardcodedText,RtlSymmetry" />
-
-
     </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+    <include layout="@layout/progress_circle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/next_div"
-        >
-
-        <at.grabner.circleprogress.CircleProgressView
-            android:id="@+id/progressBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            CircleProgressView:cpv_autoTextSize="true"
-            CircleProgressView:cpv_barColor="@color/colorAccent"
-            CircleProgressView:cpv_barWidth="30dp"
-            CircleProgressView:cpv_blockCount="9"
-            CircleProgressView:cpv_blockScale="0.97"
-            CircleProgressView:cpv_innerContourColor="@android:color/black"
-            CircleProgressView:cpv_innerContourSize="1dp"
-            CircleProgressView:cpv_maxValue="45"
-            CircleProgressView:cpv_outerContourColor="@android:color/black"
-            CircleProgressView:cpv_outerContourSize="1dp"
-            CircleProgressView:cpv_rimColor="@color/myGreen"
-            CircleProgressView:cpv_rimWidth="40dp"
-            CircleProgressView:cpv_seekMode="false"
-            CircleProgressView:cpv_showUnit="false"
-            CircleProgressView:cpv_spinColor="@color/myRed"
-            CircleProgressView:cpv_textColor="@color/myGreen"
-            CircleProgressView:cpv_textMode="Text"
-            CircleProgressView:cpv_textScale="1"
-            CircleProgressView:cpv_textSize="24sp"
-            CircleProgressView:cpv_value="5"
-            />
-
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:alpha="0.6"
-            style="@style/Widget.AppCompat.ImageButton"
-            android:background="@drawable/ic_play_arrow_black_24dp"
-
-            />
-    </FrameLayout>
+        app:layout_constraintTop_toBottomOf="@+id/dw_next_div"
+        />
 
 </android.support.constraint.ConstraintLayout>

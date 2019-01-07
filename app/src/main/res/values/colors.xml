@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#F44336</color>
-    <color name="colorPrimaryDark">#C62828</color>
-    <color name="colorAccent">#FDD835</color>
-    <color name="windowBackground">#A0A0A0</color>
+    <color name="colorPrimary">#43a047</color>
+    <color name="colorPrimaryDark">#00701a</color>
+    <color name="colorAccent">#D5A021</color>
+    <color name="windowBackground">#1E1E24</color>
+
     <color name="textColor_dark">#111</color>
     <color name="textColor_light">#EEE</color>
+    <color name="textColor_green">#237327</color>
 
     // my Special Colors
     <color name="myGreen">#388e3c</color>
@@ -13,4 +15,5 @@
     <color name="myRed">#F44336</color>
     <color name="border_color">#000</color>
     <color name="border_background">#555</color>
+
 </resources>

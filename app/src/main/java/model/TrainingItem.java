@@ -6,11 +6,13 @@ public class TrainingItem {
     private String title;
     private Drawable image;
     private String imageName;
+    private DifficultyLevel level;
 
-    public TrainingItem(String title, Drawable img, String imageName) {
+    public TrainingItem(String title, Drawable img, String imageName, DifficultyLevel level) {
         this.title = title;
         this.image = img;
         this.imageName = imageName;
+        this.level = level;
     }
 
     public String getTitle() {
@@ -35,5 +37,18 @@ public class TrainingItem {
 
     public void setImageName(String imageName) {
         this.imageName = imageName;
+    }
+
+    public DifficultyLevel getLevel() {
+        return level;
+    }
+
+    public void setLevel(DifficultyLevel level) {
+        this.level = level;
+    }
+
+    @Override
+    public String toString() {
+        return getTitle() + "(" + getLevel() + ")";
     }
 }

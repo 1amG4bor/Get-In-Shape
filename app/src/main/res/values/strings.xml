@@ -8,5 +8,15 @@
     <string name="workoutName_text">Name of the workout</string>
     <string name="workoutName_info">0:42</string>
     <string name="workoutTitle">Name of the workout</string>
-    <string name="nextWorkout_header">Next:</string>
+    <string name="nextWorkout_header"><u>Next:</u></string>
+    <string name="trainingLevel">unknown</string>
+    <string name="lvlBeginner">Beginner</string>
+    <string name="lvlIntermediate">Intermediate</string>
+    <string name="lvlAdvanced">Advanced</string>
+    <string name="lvlUnknown">unknown</string>
+    <string name="levelHeader"><u>Level:</u></string>
+    <string name="lvlText">Beginner</string>
+    <string name="exerciseHeader">Exercise:</string>
+    <string name="dataTypeSecond">sec.</string>
+    <string name="dataTypeReputation">rep.</string>
 </resources>

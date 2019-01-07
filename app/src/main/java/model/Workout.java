@@ -46,5 +46,9 @@ public class Workout {
         this.set = set;
     }
 
+    public boolean isTimedSet() {
+        return isTimedSet;
+    }
+
     //endregion
 }

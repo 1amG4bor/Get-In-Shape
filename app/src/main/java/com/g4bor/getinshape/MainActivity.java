@@ -1,9 +1,10 @@
 package com.g4bor.getinshape;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -14,17 +15,21 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
-import adapter.TrainingAdapter;
+import adapter.TrainingListAdapter;
+import model.DifficultyLevel;
 import model.TrainingItem;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private StaggeredGridLayoutManager gridLayoutManager;
-    private TrainingAdapter adapter;
+    private TrainingListAdapter adapter;
     private List<TrainingItem> listItems;
-    private FloatingActionButton btn_NewTraining;
+    private List<TrainingItem> originalList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,57 +38,47 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        listItems = new ArrayList<>();
-        fillUpList(listItems);
-
         gridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-
         recyclerView = findViewById(R.id.training_list);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        adapter = new TrainingAdapter(this, listItems);
-        adapter.setOnClickListener(new TrainingAdapter.OnItemClickListener() {
+        listItems = new ArrayList<>();
+        fillUpList(listItems);
+        adapter = new TrainingListAdapter(listItems);
+        adapter.setOnClickListener(new TrainingListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 //                Toast.makeText(view.getContext(), position + " has clicked!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, TrainingActivity.class);
                 intent.putExtra("title", listItems.get(position).getTitle());
                 intent.putExtra("imagename", listItems.get(position).getImageName());
+                intent.putExtra("level", listItems.get(position).getLevel().toString());
                 startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);
 
-        btn_NewTraining = findViewById(R.id.fab_addTraining);
-        btn_NewTraining.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "'fab'-button has clicked!", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(MainActivity.this, NewTrainingActivity.class);
-//                startActivity(intent);
-            }
-        });
-
-
         FloatingActionButton fab = findViewById(R.id.fab_addTraining);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Action will coming...", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
+                Toast.makeText(view.getContext(), "This action is not available yet...", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
 
     private void fillUpList(List<TrainingItem> listItems) {
-        listItems.add(new TrainingItem("Pull ups", getDrawable(R.drawable.weight), "pullup"));
-        listItems.add(new TrainingItem("Exercises on the floor", getDrawable(R.drawable.weight), "carpet"));
-        listItems.add(new TrainingItem("Advanced dips", getDrawable(R.drawable.weight), "dips"));
-        listItems.add(new TrainingItem("Work with weights", getDrawable(R.drawable.weight), "woman_with_weight"));
-        listItems.add(new TrainingItem("Climb up!", getDrawable(R.drawable.weight), "rope"));
-        listItems.add(new TrainingItem("Pull ups", getDrawable(R.drawable.weight), "pullup"));
-        listItems.add(new TrainingItem("Exercises on the floor", getDrawable(R.drawable.weight), "carpet"));
-        listItems.add(new TrainingItem("Advanced dips", getDrawable(R.drawable.weight), "dips"));
+        // Test data!
+        List<String> workouts = Arrays.asList("Pull ups", "Exercises on the floor", "Advanced dips", "Work with weights", "Climb up!");
+        List<DifficultyLevel> levels = Arrays.asList(DifficultyLevel.BEGINNER, DifficultyLevel.INTERMEDIATE, DifficultyLevel.ADVANCED);
+        for (int i = 0; i < 10; i++) {
+            Random random = new Random();
+            String training = workouts.get(random.nextInt(workouts.size()));
+            DifficultyLevel lvl = levels.get(random.nextInt(levels.size()));
+            listItems.add(new TrainingItem(training, getDrawable(R.drawable.weight), "weight", lvl));
+        }
+        originalList = new ArrayList<>(listItems);
     }
 
     @Override
@@ -93,18 +88,44 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        String levelId = item.getTitle().toString();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (levelId) {
+            case "Beginner workouts":
+                filteringWorkouts(DifficultyLevel.BEGINNER);
+                break;
+            case "Intermediate workouts":
+                filteringWorkouts(DifficultyLevel.INTERMEDIATE);
+                break;
+            case "Advanced workouts":
+                filteringWorkouts(DifficultyLevel.ADVANCED);
+                break;
+            case "ALL workouts":
+                restoreList();
+                adapter.notifyDataSetChanged();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void filteringWorkouts(DifficultyLevel level) {
+        restoreList();
+        List<TrainingItem> newList = listItems.stream().filter(i -> i.getLevel().equals(level)).collect(Collectors.toList());
+        listItems.clear();
+        listItems.addAll(newList);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void restoreList() {
+        listItems.clear();
+        listItems.addAll(originalList);
     }
 }
